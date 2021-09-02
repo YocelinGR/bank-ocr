@@ -69,4 +69,19 @@ defmodule BankOcr.Digits.Digit do
         "#{account} #{checksum_result}"
     end
   end
+
+  @doc """
+  Process account to be validated and evaluated in bulk
+
+  ## Examples
+
+      iex> BankOcr.Digits.Digit.process_account_bulk(["457508000", "664371495", "86110??36"])
+      ["457508000 OK", "664371495 ERR", "86110??36 ILL"]
+
+  """
+  @spec process_account_bulk([String.t()]) :: [String.t()]
+  def process_account_bulk(accounts) do
+    accounts
+    |> Enum.map(fn account -> process_account(account) end)
+  end
 end
