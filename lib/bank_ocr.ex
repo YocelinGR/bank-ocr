@@ -4,7 +4,7 @@ defmodule BankOcr do
   """
   alias BankOcr.Digits.Digit
   alias BankOcr.Utils.Util
-require Logger
+
   @doc """
   Process accountss
 

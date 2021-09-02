@@ -1,7 +1,7 @@
 defmodule BankOcr.Utils.Matrix do
   @moduledoc """
-    This module will manage the operations related to matrix. Alsi will get the number matrix to be compared
-    """
+  This module will manage the operations related to matrix. Alsi will get the number matrix to be compared
+  """
   @zero [[" ", "_", " "], ["|", " ", "|"], ["|", "_", "|"]]
   @one [[" ", " ", " "], [" ", " ", "|"], [" ", " ", "|"]]
   @two [[" ", "-", " "], [" ", "_", "|"], ["|", "_", " "]]
@@ -12,5 +12,4 @@ defmodule BankOcr.Utils.Matrix do
   @seven [[" ", "-", " "], [" ", " ", "|"], [" ", " ", "|"]]
   @eight [[" ", "-", " "], ["|", "_", "|"], ["|", "_", "|"]]
   @nine [[" ", "-", " "], ["|", "_", "|"], [" ", "_", "|"]]
-
 end

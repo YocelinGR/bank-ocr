@@ -1,7 +1,7 @@
 defmodule BankOcr.Utils.Util do
-@moduledoc """
-    This module will provide functions that will be useful for all the modules
-    """
+  @moduledoc """
+  This module will provide functions that will be useful for all the modules
+  """
 
   @doc """
   List of strings into string
@@ -35,10 +35,6 @@ defmodule BankOcr.Utils.Util do
     |> String.split("\n")
   end
 end
-# string  into list
-# slice en segmentos de 9
-# procesar list
-# regresar list a string
 
 # read file
 # matrix
