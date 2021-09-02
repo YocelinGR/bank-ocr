@@ -17,7 +17,6 @@ defmodule BankOcr.Digits.Digit do
     account_reversed = account |> String.reverse() |> String.graphemes()
     account_digits_parsed = Enum.map(account_reversed, fn x -> String.to_integer(x) end)
 
-
     {multiply_account, _acc} = Enum.map_reduce(account_digits_parsed, 1, fn x, acc -> {x * acc, acc + 1} end)
 
     checksum = Enum.reduce(multiply_account, 0, fn x, acc -> x + acc end)

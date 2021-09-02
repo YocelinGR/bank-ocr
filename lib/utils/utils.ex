@@ -35,3 +35,11 @@ defmodule BankOcr.Utils.Util do
     |> String.split("\n")
   end
 end
+# string  into list
+# slice en segmentos de 9
+# procesar list
+# regresar list a string
+
+# read file
+# matrix
+# write file
