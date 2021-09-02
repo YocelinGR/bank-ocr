@@ -31,4 +31,21 @@ defmodule BankOcr.Digits.Digit do
     end
     {account, checksum_result}
   end
+
+  @doc """
+  Make account validation validation
+
+  ## Examples
+
+      iex> BankOcr.Digits.Digit.validate_Account("457508000")
+      true | false
+
+  """
+  @spec validate_Account(String.t()) :: Bool.t()
+  def validate_Account(account) do
+    String.contains?(account, "?")
+  end
 end
+
+
+# https://docs.google.com/document/d/1uEZlCL7gRcKRokHh-nPRtkPDeQxg20gG0SVLZHwpLxU/edit
