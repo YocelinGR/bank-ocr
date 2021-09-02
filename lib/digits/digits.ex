@@ -13,7 +13,7 @@ defmodule BankOcr.Digits.Digit do
       {457508000, "OK"} | {457508000, "ERR"}
 
   """
-  @spec checksum(String.t()) :: {String.t(), String.t()}
+  @spec checksum(String.t()) :: String.t()
   def checksum(account) do
     account_reversed = account |> String.reverse() |> String.graphemes()
     account_digits_parsed = Enum.map(account_reversed, fn x -> String.to_integer(x) end)
@@ -29,7 +29,7 @@ defmodule BankOcr.Digits.Digit do
       0 -> "OK"
       _ -> "ERR"
     end
-    {account, checksum_result}
+    checksum_result
   end
 
   @doc """
@@ -37,15 +37,37 @@ defmodule BankOcr.Digits.Digit do
 
   ## Examples
 
-      iex> BankOcr.Digits.Digit.validate_Account("457508000")
+      iex> BankOcr.Digits.Digit.validate_account("457508000")
       true | false
 
   """
-  @spec validate_Account(String.t()) :: Bool.t()
-  def validate_Account(account) do
+  @spec validate_account(String.t()) :: Bool.t()
+  def validate_account(account) do
     String.contains?(account, "?")
   end
+
+  @doc """
+  Process account to be validated and evaluated
+
+  ## Examples
+
+      iex> BankOcr.Digits.Digit.process_account("457508000")
+      "457508000 OK"
+
+      iex> BankOcr.Digits.Digit.process_account("664371495")
+      "664371495 ERR"
+
+      iex> BankOcr.Digits.Digit.process_account("86110??36")
+      "86110??36 ILL"
+
+  """
+  @spec process_account(String.t()) :: String.t()
+  def process_account(account) do
+    case validate_account(account) do
+      true -> "#{account} ILL"
+      false ->
+        checksum_result = checksum(account)
+        "#{account} #{checksum_result}"
+    end
+  end
 end
-
-
-# https://docs.google.com/document/d/1uEZlCL7gRcKRokHh-nPRtkPDeQxg20gG0SVLZHwpLxU/edit
