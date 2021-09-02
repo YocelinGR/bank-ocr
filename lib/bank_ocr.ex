@@ -1,18 +1,6 @@
 defmodule BankOcr do
   @moduledoc """
-  Documentation for `BankOcr`.
+  This will be the entry point to connect the modules with themselves
   """
 
-  @doc """
-  Hello world.
-
-  ## Examples
-
-      iex> BankOcr.hello()
-      :world
-
-  """
-  def hello do
-    :world
-  end
 end

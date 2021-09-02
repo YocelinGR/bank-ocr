@@ -2,7 +2,6 @@ defmodule BankOcr.Digits.Digit do
 @moduledoc """
   This module will manage the operations related with digita once converted
   """
-  require Logger
 
   @doc """
   Make checksum calculation
