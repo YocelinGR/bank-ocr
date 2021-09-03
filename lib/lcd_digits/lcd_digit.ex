@@ -139,17 +139,46 @@ defmodule BankOcr.LcdDigits.LcdDigit do
     " _|",
   ]), do: "9"
 
+  def lcd_digit_to_integer(_), do: "?"
+
   @doc """
-  Convert multiline str into lists
+  Convert a list of lcd digit on a str containing the list integer numbers
 
   ## Examples
 
-      iex> BankOcr.LcdDigits.LcdDigit.process_digit_list([" _  _  _  _  _  _  _  _  _                             _  _  _  _  _  _  _  _  _", .. "||_  _|  | _||_|  ||_| _  |  |  |  |  |  |  |  |  ||_ |_ |_ |_ |_ |_ |_ |_ |_"])
-      ["45750800066437149586110??36"]
+      iex> BankOcr.LcdDigits.LcdDigit.process_digit_list([" _  _  _  _  _  _  _  _  _                             _  _  _  _  _  _  _  _  _ ", "| || || || || || || || || |  |  |  |  |  |  |  |  |  | _| _| _| _| _| _| _| _| _|", "|_||_||_||_||_||_||_||_||_|  |  |  |  |  |  |  |  |  ||_ |_ |_ |_ |_ |_ |_ |_ |_ "])
+      "45750800066437149586110??36"
 
   """
-  @spec process_digit_list([String.t()]) :: [String.t()]
+  @spec process_digit_list([String.t()]) :: String.t()
   def process_digit_list(digit_rows) do
-    digit_rows
+    chunky_list = digit_rows
+    |> Enum.map(fn x ->
+      x
+      |> String.graphemes()
+      |> Enum.chunk_every(3)
+    end)
+
+    first_list = Enum.at(chunky_list, 0)
+    second_list = Enum.at(chunky_list, 1)
+    third_list = Enum.at(chunky_list, 2)
+
+    matrix_length = length(first_list)-1
+
+    matrix_list = for n <- 0..matrix_length do
+      first_row = Enum.at(first_list, n) |> List.to_string()
+      second_row = Enum.at(second_list, n) |> List.to_string()
+      third_row = Enum.at(third_list, n) |> List.to_string()
+
+      [first_row, second_row, third_row]
+    end
+
+    matrix_list
+    |> Enum.map(fn digit ->
+      lcd_digit_to_integer(digit)
+    end)
+    |> List.to_string()
   end
 end
+# repeat process_digit_list every 3 lines
+# pasarlo a lo que ya tengo
