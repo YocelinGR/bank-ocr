@@ -63,12 +63,12 @@ _| _| _| _| _| _| _| _| _| |  |  |  |  |  |  |  |  ||_ |_ |_ |_ |_ |_ |_ |_ |_
 
   ## Examples
 
-      iex> BankOcr.LcdDigits.LcdDigit.multiline_str_to_ist()
+      iex> BankOcr.LcdDigits.LcdDigit.multiline_str_to_list()
       [" _  _  _  _  _  _  _  _  _                             _  _  _  _  _  _  _  _  _", .. "||_  _|  | _||_|  ||_| _  |  |  |  |  |  |  |  |  ||_ |_ |_ |_ |_ |_ |_ |_ |_"]
 
   """
-  @spec multiline_str_to_ist() :: [String.t()]
-  def multiline_str_to_ist() do
+  @spec multiline_str_to_list() :: [String.t()]
+  def multiline_str_to_list() do
     @lcd_digits_str
     |> Util.string_to_list()
     |> Enum.filter(fn x -> x != "" end)
@@ -192,7 +192,7 @@ _| _| _| _| _| _| _| _| _| |  |  |  |  |  |  |  |  ||_ |_ |_ |_ |_ |_ |_ |_ |_
   """
   @spec process_lcd_file() :: String.t()
   def process_lcd_file() do
-    multiline_str_to_ist()
+    multiline_str_to_list()
     |> Enum.chunk_every(3)
     |> Enum.map(fn digits ->
       process_digit_list(digits)
@@ -200,5 +200,3 @@ _| _| _| _| _| _| _| _| _| |  |  |  |  |  |  |  |  ||_ |_ |_ |_ |_ |_ |_ |_ |_
     |> Enum.reduce("", fn x, acc -> "#{acc}\n#{x}" end)
   end
 end
-# repeat process_digit_list every 3 lines
-# pasarlo a lo que ya tengo

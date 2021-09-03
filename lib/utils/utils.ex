@@ -35,7 +35,3 @@ defmodule BankOcr.Utils.Util do
     |> String.split(~r{(\r\n|\r|\n)})
   end
 end
-
-# read file
-# matrix
-# write file
