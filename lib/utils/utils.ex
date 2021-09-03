@@ -32,7 +32,7 @@ defmodule BankOcr.Utils.Util do
   @spec string_to_list(String.t()) :: [String.t()]
   def string_to_list(accounts) do
     accounts
-    |> String.split("\n")
+    |> String.split(~r{(\r\n|\r|\n)})
   end
 end
 
