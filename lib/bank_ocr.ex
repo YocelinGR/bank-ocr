@@ -4,6 +4,7 @@ defmodule BankOcr do
   """
   alias BankOcr.Digits.Digit
   alias BankOcr.Utils.Util
+  alias BankOcr.LcdDigits.LcdDigit
 
   @doc """
   Process accountss
@@ -23,5 +24,20 @@ defmodule BankOcr do
     |> List.flatten()
     |> Digit.process_account_bulk()
     |> Util.list_to_string()
+  end
+
+  @doc """
+  Process bank ocr
+
+  ## Examples
+
+      iex> BankOcr.bank_ocr()
+      "457508000 OK\n664371495 ERR\n86110??36 ILL"
+
+  """
+  @spec bank_ocr() :: String.t()
+  def bank_ocr() do
+    LcdDigit.process_lcd_file()
+    |> process_line_accounts()
   end
 end
