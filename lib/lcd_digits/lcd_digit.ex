@@ -75,6 +75,71 @@ defmodule BankOcr.LcdDigits.LcdDigit do
   end
 
   @doc """
+  Convert a list of lcd number into a string representing a integer
+
+  ## Examples
+
+      iex> BankOcr.LcdDigits.LcdDigit.process_digit_list([
+    " _ ",
+    "| |",
+    "|_|",
+  ])
+      "0"
+
+  """
+  @spec lcd_digit_to_integer([String.t]) :: String.t()
+  def lcd_digit_to_integer([
+    " _ ",
+    "| |",
+    "|_|",
+  ]), do: "0"
+  def lcd_digit_to_integer([
+    "   ",
+    "  |",
+    "  |",
+  ]), do: "1"
+  def lcd_digit_to_integer([
+    " _ ",
+    " _|",
+    "|_ ",
+  ]), do: "2"
+  def lcd_digit_to_integer([
+    " _ ",
+    " _|",
+    " _|",
+  ]), do: "3"
+  def lcd_digit_to_integer([
+    "   ",
+    "|_|",
+    "  |",
+  ]), do: "4"
+  def lcd_digit_to_integer([
+    " _ ",
+    "|_ ",
+    " _|",
+  ]), do: "5"
+  def lcd_digit_to_integer([
+    " _ ",
+    "|_ ",
+    "|_|",
+  ]), do: "6"
+  def lcd_digit_to_integer([
+    " _ ",
+    "  |",
+    "  |",
+  ]), do: "7"
+  def lcd_digit_to_integer([
+    " _ ",
+    "|_|",
+    "|_|",
+  ]), do: "8"
+  def lcd_digit_to_integer([
+    " _ ",
+    "|_|",
+    " _|",
+  ]), do: "9"
+
+  @doc """
   Convert multiline str into lists
 
   ## Examples
@@ -83,11 +148,8 @@ defmodule BankOcr.LcdDigits.LcdDigit do
       ["45750800066437149586110??36"]
 
   """
-  @spec process_digit_list() :: [String.t()]
-  def process_digit_list() do
-    @lcd_digits_str
-    |> Util.string_to_list()
-    |> Enum.filter(fn x -> x != "" end)
+  @spec process_digit_list([String.t()]) :: [String.t()]
+  def process_digit_list(digit_rows) do
+    digit_rows
   end
-
 end
