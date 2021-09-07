@@ -5,6 +5,7 @@ defmodule BankOcr do
   alias BankOcr.Digits.Digit
   alias BankOcr.Utils.Util
   alias BankOcr.LcdDigits.LcdDigit
+  alias BankOcr.Files.FileManager
 
   @doc """
   Process accountss
@@ -27,6 +28,21 @@ defmodule BankOcr do
   end
 
   @doc """
+  Process bank ocr lines
+
+  ## Examples
+
+      iex> BankOcr.bank_ocr_lines()
+      "457508000 OK\n664371495 ERR\n86110??36 ILL"
+
+  """
+  @spec bank_ocr_lines(String.t()) :: String.t()
+  def bank_ocr_lines(content) do
+    LcdDigit.process_lcd_file(content)
+    |> process_line_accounts()
+  end
+
+  @doc """
   Process bank ocr
 
   ## Examples
@@ -37,7 +53,13 @@ defmodule BankOcr do
   """
   @spec bank_ocr() :: String.t()
   def bank_ocr() do
-    LcdDigit.process_lcd_file()
-    |> process_line_accounts()
+    with {:ok, content} <- FileManager.readFile("input_file.txt"),
+         msm_processed <- bank_ocr_lines(content) do
+          FileManager.writeFile("file_processed.txt", msm_processed)
+
+          msm_processed
+    else
+      {:err, msm} -> {:err, msm}
+    end
   end
 end

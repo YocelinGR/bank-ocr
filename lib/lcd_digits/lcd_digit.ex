@@ -67,9 +67,9 @@ _| _| _| _| _| _| _| _| _| |  |  |  |  |  |  |  |  ||_ |_ |_ |_ |_ |_ |_ |_ |_
       [" _  _  _  _  _  _  _  _  _                             _  _  _  _  _  _  _  _  _", .. "||_  _|  | _||_|  ||_| _  |  |  |  |  |  |  |  |  ||_ |_ |_ |_ |_ |_ |_ |_ |_"]
 
   """
-  @spec multiline_str_to_list() :: [String.t()]
-  def multiline_str_to_list() do
-    @lcd_digits_str
+  @spec multiline_str_to_list(String.t()) :: [String.t()]
+  def multiline_str_to_list(lcd_digits_str) do
+    lcd_digits_str
     |> Util.string_to_list()
     |> Enum.filter(fn x -> x != "" end)
   end
@@ -190,9 +190,9 @@ _| _| _| _| _| _| _| _| _| |  |  |  |  |  |  |  |  ||_ |_ |_ |_ |_ |_ |_ |_ |_
       [" _  _  _  _  _  _  _  _  _                             _  _  _  _  _  _  _  _  _", .. "||_  _|  | _||_|  ||_| _  |  |  |  |  |  |  |  |  ||_ |_ |_ |_ |_ |_ |_ |_ |_"]
 
   """
-  @spec process_lcd_file() :: String.t()
-  def process_lcd_file() do
-    multiline_str_to_list()
+  @spec process_lcd_file(String.t()) :: String.t()
+  def process_lcd_file(lcd_digits_str) do
+    multiline_str_to_list(lcd_digits_str)
     |> Enum.chunk_every(3)
     |> Enum.map(fn digits ->
       process_digit_list(digits)
