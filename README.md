@@ -30,15 +30,13 @@ To make a better management of the processes and for further improvements, I wil
 
 ## Scope
 - Givin a string with the LCD digits, convert to integer and evaluate each account
-## Missing
-- Unit Test
 - Receive a file and make all the process
 - Write on a file the result
+## For future
+- Unit Test
 - Manage the process that will be slow: this will be managed with a polling system, with task async processes or with a Cron task to distribute charge over time. Even this will be run in the background with a GenServer worker to continue running with detaining the main function response
 - Validate the length of each line
 - Validate the length of the list with the LCD representations
-## Failing 
-- I have a problem with row border characters that makes the LCD digits to integer fail in some characters
 ## Run
 Execute `iex -S mix` and execute the function: `BankOcr.bank_ocr()` on the elixir console
 
